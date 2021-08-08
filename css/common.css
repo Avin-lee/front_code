@@ -1,0 +1,248 @@
+html,
+body {
+  height: 100%;
+  background-color: #FFFFFF;
+}
+
+html .main-wrapper,
+body .main-wrapper {
+  height: 100%;
+  display: flex;
+}
+
+html .main-wrapper h1,
+body .main-wrapper h1 {
+  padding-left: 30px;
+}
+
+html .main-wrapper h1 .text-primary,
+body .main-wrapper h1 .text-primary {
+  color: #252D47;
+}
+
+html .main-wrapper h1 .text-primary i,
+body .main-wrapper h1 .text-primary i {
+  position: relative;
+  top: 3px;
+}
+
+html .main-wrapper h1 .text-primary:hover,
+body .main-wrapper h1 .text-primary:hover {
+  cursor: pointer;
+  text-shadow: 2px 2px 5px #B4BCCC;
+}
+
+html .main-wrapper h1 .text-primary:hover i,
+body .main-wrapper h1 .text-primary:hover i {
+  color: #000000;
+  transform: scale(1.3);
+  transition: all 0.4s;
+}
+
+html .main-wrapper .main-l,
+body .main-wrapper .main-l {
+  flex: auto;
+  width: 60%;
+  padding: 8px;
+}
+
+html .main-wrapper .main-l .title-i .date-counts-wrapper,
+body .main-wrapper .main-l .title-i .date-counts-wrapper {
+  float: right;
+}
+
+html .main-wrapper .main-l .recent-result,
+body .main-wrapper .main-l .recent-result {
+  border: 1px solid #DFE4ED;
+  height: calc(100% - 80px);
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px #c5cedf;
+  overflow: scroll;
+}
+
+html .main-wrapper .main-l .recent-result .blank-nodata-icon,
+body .main-wrapper .main-l .recent-result .blank-nodata-icon {
+  background-position-y: calc(80% - 30px);
+  padding-top: 400px;
+}
+
+html .main-wrapper .main-l .recent-result .period-row,
+body .main-wrapper .main-l .recent-result .period-row {
+  height: 40px;
+  padding: 5px 30px;
+  border-radius: 5px;
+  background-color: #F4F7FD;
+  width: 95%;
+  margin: 5px auto;
+}
+
+html .main-wrapper .main-l .recent-result .period-row:hover,
+body .main-wrapper .main-l .recent-result .period-row:hover {
+  cursor: pointer;
+  background-color: #ECF1F9;
+  box-shadow: 5px 5px 5px #c5cedf;
+  position: relative;
+  top: -2px;
+  left: -2px;
+  transition: all .5s;
+}
+
+html .main-wrapper .main-l .recent-result .period-row .result-date,
+body .main-wrapper .main-l .recent-result .period-row .result-date {
+  display: inline-block;
+  width: 130px;
+}
+
+html .main-wrapper .main-l .recent-result .period-row .result-date span,
+body .main-wrapper .main-l .recent-result .period-row .result-date span {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+html .main-wrapper .main-l .recent-result .period-row .number-wrapper,
+body .main-wrapper .main-l .recent-result .period-row .number-wrapper {
+  display: inline-block;
+  padding-left: 10px;
+}
+
+html .main-wrapper .main-l .recent-result .period-row .number-wrapper .number-item,
+body .main-wrapper .main-l .recent-result .period-row .number-wrapper .number-item {
+  display: inline-block;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  background-color: red;
+  text-align: center;
+}
+
+html .main-wrapper .main-l .recent-result .period-row .number-wrapper .number-item span,
+body .main-wrapper .main-l .recent-result .period-row .number-wrapper .number-item span {
+  font-size: 20px;
+  color: #FFFFFF;
+  font-weight: bold;
+}
+
+html .main-wrapper .main-l .recent-result .period-row .number-wrapper .number-item.target-number,
+body .main-wrapper .main-l .recent-result .period-row .number-wrapper .number-item.target-number {
+  background-color: #34C2D5;
+}
+
+html .main-wrapper .main-l .recent-result .period-row .opt-buttons,
+body .main-wrapper .main-l .recent-result .period-row .opt-buttons {
+  float: right;
+  position: relative;
+  top: 2px;
+}
+
+html .main-wrapper .main-l .recent-result .period-row .opt-buttons button[data-action="edit"],
+body .main-wrapper .main-l .recent-result .period-row .opt-buttons button[data-action="edit"] {
+  color: #00B050;
+}
+
+html .main-wrapper .main-l .recent-result .period-row .opt-buttons button[data-action="delete"],
+body .main-wrapper .main-l .recent-result .period-row .opt-buttons button[data-action="delete"] {
+  color: #FA5555;
+}
+
+html .main-wrapper .main-r,
+body .main-wrapper .main-r {
+  flex: auto;
+  width: 40%;
+  padding: 8px;
+}
+
+html .main-wrapper .main-r .form-horizon,
+body .main-wrapper .main-r .form-horizon {
+  box-shadow: 5px 5px 5px #c5cedf;
+}
+
+html .main-wrapper .main-r .form-horizon input.form-control,
+body .main-wrapper .main-r .form-horizon input.form-control {
+  width: 420px;
+}
+
+html .main-wrapper .main-r .form-horizon button,
+body .main-wrapper .main-r .form-horizon button {
+  margin-left: 10px;
+}
+
+html .main-wrapper .main-r .form-horizon #date-input,
+body .main-wrapper .main-r .form-horizon #date-input {
+  width: 105px;
+  margin-right: 5px;
+}
+
+html .main-wrapper .main-r .form-horizon span.dateicon,
+body .main-wrapper .main-r .form-horizon span.dateicon {
+  right: 502px;
+}
+
+html .main-wrapper .main-r .form-horizon input.long-input,
+body .main-wrapper .main-r .form-horizon input.long-input {
+  width: 530px;
+}
+
+html .main-wrapper .main-r .statistic-module,
+body .main-wrapper .main-r .statistic-module {
+  width: 100%;
+  height: 605px;
+  border-radius: 5px;
+  border: 1px solid #eee;
+  box-shadow: 5px 5px 5px #c5cedf;
+  overflow: scroll;
+  padding: 10px;
+}
+
+html .main-wrapper .main-r .statistic-module .eCharts-option-button,
+body .main-wrapper .main-r .statistic-module .eCharts-option-button {
+  position: absolute;
+  right: 47px;
+  z-index: 999999;
+}
+
+html .main-wrapper .main-r .statistic-module #eCharts-wrapper,
+body .main-wrapper .main-r .statistic-module #eCharts-wrapper {
+  width: 100%;
+  height: 1500px;
+}
+
+html .idlg-outer a.idlg-close,
+body .idlg-outer a.idlg-close {
+  top: 10px;
+}
+
+html .idlg-outer .idlg-header,
+body .idlg-outer .idlg-header {
+  background-color: #252D47;
+  padding: 6px;
+}
+
+html .idlg-outer .idlg-header .idlg-title,
+body .idlg-outer .idlg-header .idlg-title {
+  color: #ffffff;
+}
+
+html .idlg-outer .idlg-header .idlg-title span.aidicon,
+body .idlg-outer .idlg-header .idlg-title span.aidicon {
+  transform: scale(0.7);
+}
+
+html .idlg-outer .idlg-main,
+body .idlg-outer .idlg-main {
+  padding: 16px;
+}
+
+html .idlg-outer .idlg-main .form-horizon,
+body .idlg-outer .idlg-main .form-horizon {
+  padding: 1px;
+}
+
+html .idlg-outer .idlg-main .form-horizon .form-group,
+body .idlg-outer .idlg-main .form-horizon .form-group {
+  margin: 0;
+}
+
+html .idlg-outer .idlg-main .form-horizon .form-group #edit-number,
+body .idlg-outer .idlg-main .form-horizon .form-group #edit-number {
+  width: 100%;
+}

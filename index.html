@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>快乐8历史开奖记录</title>
+    <link rel="stylesheet" href="./assets/fh-ui/css/fh-ui.min.css">
+    <link rel="stylesheet" href="./css/common.css">
+</head>
+
+<body>
+    <div class="main-wrapper">
+        <div class="main-l">
+            <div class="title-i">
+                <h1>
+                    <span class="text-primary"><i class="aidicon aidicon-certificate"></i> 近期开奖结果</span>
+                    <span class="text-invalid date-counts-wrapper">共 <span class="date-counts">0</span> 期</span>
+                </h1>
+            </div>
+            <div class="recent-result"></div>
+        </div>
+        <div class="main-r">
+            <div class="title-i">
+                <h1>
+                    <span class="text-primary"><i class="aidicon aidicon-magnify"></i> 查询</span>
+                </h1>
+            </div>
+            <div class="form-horizon">
+                <form class="opt-form">
+                    <div class="form-group clearfix">
+                        <label class="form-label tar">添加号码</label>
+                        <input type="text" class="form-control" id="date-input" placeholder="请输入日期" autocomplete="off">
+                        <span class="aidicon aidicon-calendar dateicon"></span>
+                        <input type="text" class="form-control" id="result-input" placeholder="请输入本期中奖号码, 用空格分开"
+                            autocomplete="off">
+                        <button type="button" class="btn btn-primary" id="add-number">
+                            <span class="aidicon aidicon-plus-circle-outline"></span>
+                        </button>
+                    </div>
+                    <div class="form-group clearfix">
+                        <label class="form-label tar">数字次数查询</label>
+                        <input type="number" class="form-control long-input" id="counts-query" placeholder="请输入你想查询的号码"
+                            autocomplete="off">
+                        <button type="button" class="btn btn-primary" id="counts-query-button">
+                            <span class="aidicon aidicon-magnify"></span>
+                        </button>
+                    </div>
+                    <div class="form-group clearfix">
+                        <label class="form-label tar">奇偶数查询</label>
+                        <input type="number" class="form-control long-input" id="odd-even-number" placeholder="请输入数字"
+                            autocomplete="off">
+                        <button type="button" class="btn btn-primary" id="check-odd-even">
+                            <span class="aidicon aidicon-magnify"></span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="title-i">
+                <h1>
+                    <span class="text-primary"><i class="aidicon aidicon-chart-pie"></i> 统计</span>
+                </h1>
+            </div>
+            <div class="statistic-module">
+                <div class="eCharts-option-button">
+                    <span class="btn-switch btn-multiple-state">
+                        <span class="btn-state checked" data-value="all">全部</span>
+                        <span class="btn-state" data-value="odd">奇数</span>
+                        <span class="btn-state" data-value="even">偶数</span>
+                    </span>
+                </div>
+                <div id="eCharts-wrapper"></div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="./assets/jQuery/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="./assets/requireJS/require.js"></script>
+    <script type="text/javascript">
+        require(['./js/index.js'], index => index.init())
+    </script>
+</body>
+
+</html>
