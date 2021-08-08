@@ -182,6 +182,24 @@ body .main-wrapper .main-r .form-horizon input.long-input {
   width: 530px;
 }
 
+html .main-wrapper .main-r .form-horizon .half-group,
+body .main-wrapper .main-r .form-horizon .half-group {
+  width: 45%;
+  float: left;
+}
+
+html .main-wrapper .main-r .form-horizon .half-group input,
+body .main-wrapper .main-r .form-horizon .half-group input {
+  width: 105px;
+}
+
+html .main-wrapper .main-r .form-horizon .half-group .forecasted,
+body .main-wrapper .main-r .form-horizon .half-group .forecasted {
+  width: 210px;
+  float: right;
+  margin-right: 2px;
+}
+
 html .main-wrapper .main-r .statistic-module,
 body .main-wrapper .main-r .statistic-module {
   width: 100%;
@@ -197,7 +215,7 @@ html .main-wrapper .main-r .statistic-module .eCharts-option-button,
 body .main-wrapper .main-r .statistic-module .eCharts-option-button {
   position: absolute;
   right: 47px;
-  z-index: 999999;
+  z-index: 999;
 }
 
 html .main-wrapper .main-r .statistic-module #eCharts-wrapper,
@@ -245,4 +263,85 @@ body .idlg-outer .idlg-main .form-horizon .form-group {
 html .idlg-outer .idlg-main .form-horizon .form-group #edit-number,
 body .idlg-outer .idlg-main .form-horizon .form-group #edit-number {
   width: 100%;
+}
+
+html .idlg-outer.forecasted-dialog .idlg-header,
+body .idlg-outer.forecasted-dialog .idlg-header {
+  height: auto !important;
+  display: unset !important;
+  padding: 0;
+}
+
+html .idlg-outer.forecasted-dialog .idlg-title,
+body .idlg-outer.forecasted-dialog .idlg-title {
+  border: 0px;
+  height: 250px;
+  padding: 0;
+  background: #fff url(../images/thewinning.jpeg) no-repeat center center;
+  background-size: 100%;
+}
+
+html .idlg-outer.forecasted-dialog .idlg-main .forecasted-main-container .tay-number-text,
+body .idlg-outer.forecasted-dialog .idlg-main .forecasted-main-container .tay-number-text {
+  text-align: center;
+}
+
+html .idlg-outer.forecasted-dialog .idlg-main .forecasted-main-container .forecasted-number-wrapper,
+body .idlg-outer.forecasted-dialog .idlg-main .forecasted-main-container .forecasted-number-wrapper {
+  display: flex;
+  margin-top: 15px;
+  height: 30px;
+}
+
+html .idlg-outer.forecasted-dialog .idlg-main .forecasted-main-container .forecasted-number-wrapper .forecasted-number-wrapper-inner,
+body .idlg-outer.forecasted-dialog .idlg-main .forecasted-main-container .forecasted-number-wrapper .forecasted-number-wrapper-inner {
+  margin: 0 auto;
+  position: relative;
+  opacity: 0;
+}
+
+html .idlg-outer.forecasted-dialog .idlg-main .forecasted-main-container .forecasted-number-wrapper .forecasted-number-wrapper-inner .number-item,
+body .idlg-outer.forecasted-dialog .idlg-main .forecasted-main-container .forecasted-number-wrapper .forecasted-number-wrapper-inner .number-item {
+  color: #ffffff;
+  font-size: 19px;
+  font-weight: bold;
+  display: inline-block;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  background-color: red;
+  text-align: center;
+}
+
+html .idlg-outer.forecasted-dialog .idlg-main .forecasted-main-container .forecasted-number-wrapper .forecasted-number-wrapper-inner .number-item:hover,
+body .idlg-outer.forecasted-dialog .idlg-main .forecasted-main-container .forecasted-number-wrapper .forecasted-number-wrapper-inner .number-item:hover {
+  cursor: pointer;
+}
+
+html .idlg-outer.forecasted-dialog .idlg-main .forecasted-main-container .forecasted-number-wrapper .forecasted-number-wrapper-inner i.change-to-other,
+body .idlg-outer.forecasted-dialog .idlg-main .forecasted-main-container .forecasted-number-wrapper .forecasted-number-wrapper-inner i.change-to-other {
+  transform: scale(1.5);
+  margin-left: 5px;
+}
+
+html .idlg-outer.forecasted-dialog .idlg-main .forecasted-main-container .forecasted-number-wrapper .forecasted-number-wrapper-inner i.change-to-other:hover,
+body .idlg-outer.forecasted-dialog .idlg-main .forecasted-main-container .forecasted-number-wrapper .forecasted-number-wrapper-inner i.change-to-other:hover {
+  cursor: pointer;
+  transform: rotate(-180deg) scale(1.5);
+  transition: all 0.5s;
+}
+
+html .idlg-outer.forecasted-dialog .idlg-main .private-info,
+body .idlg-outer.forecasted-dialog .idlg-main .private-info {
+  text-align: center;
+  padding: 20px 0;
+}
+
+html .idlg-outer.forecasted-dialog .idlg-main .private-info-detail,
+body .idlg-outer.forecasted-dialog .idlg-main .private-info-detail {
+  text-align: center;
+  padding: 20px 0;
+  color: #B4BCCC;
+  font-size: 12px;
+  padding-bottom: 0;
 }

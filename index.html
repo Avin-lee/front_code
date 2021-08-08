@@ -27,7 +27,7 @@
                     <span class="text-primary"><i class="aidicon aidicon-magnify"></i> 查询</span>
                 </h1>
             </div>
-            <div class="form-horizon">
+            <div class="form-horizon clearfix">
                 <form class="opt-form">
                     <div class="form-group clearfix">
                         <label class="form-label tar">添加号码</label>
@@ -47,13 +47,31 @@
                             <span class="aidicon aidicon-magnify"></span>
                         </button>
                     </div>
-                    <div class="form-group clearfix">
+                    <div class="form-group half-group clearfix">
                         <label class="form-label tar">奇偶数查询</label>
                         <input type="number" class="form-control long-input" id="odd-even-number" placeholder="请输入数字"
                             autocomplete="off">
                         <button type="button" class="btn btn-primary" id="check-odd-even">
                             <span class="aidicon aidicon-magnify"></span>
                         </button>
+                    </div>
+                    <div class="form-group half-group clearfix">
+                        <label class="form-label tar">预测下期开奖</label>
+                        <div class="dropdownSelect forecasted">
+                            <div id="dropdownSelect" data-target="#"></div>
+                            <ul class="dropdownSelect-menu" role="menu" aria-labelledby="dLabel">
+                                <li data-value="10"><a href="javascript:void(0)">选10</a></li>
+                                <li data-value="9"><a href="javascript:void(0)">选9</a></li>
+                                <li data-value="8"><a href="javascript:void(0)">选8</a></li>
+                                <li data-value="7"><a href="javascript:void(0)">选7</a></li>
+                                <li data-value="6"><a href="javascript:void(0)">选6</a></li>
+                                <li data-value="5"><a href="javascript:void(0)">选5</a></li>
+                                <li data-value="4"><a href="javascript:void(0)">选4</a></li>
+                                <li data-value="3"><a href="javascript:void(0)">选3</a></li>
+                                <li data-value="2"><a href="javascript:void(0)">选2</a></li>
+                                <li data-value="1"><a href="javascript:void(0)">选1</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </form>
             </div>

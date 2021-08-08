@@ -151,6 +151,21 @@ body {
                 input.long-input {
                     width: 530px;
                 }
+
+                .half-group {
+                    width: 45%;
+                    float: left;
+
+                    input {
+                        width: 105px;
+                    }
+
+                    .forecasted {
+                        width: 210px;
+                        float: right;
+                        margin-right: 2px;
+                    }
+                }
             }
 
             .statistic-module {
@@ -165,7 +180,7 @@ body {
                 .eCharts-option-button {
                     position: absolute;
                     right: 47px;
-                    z-index: 999999;
+                    z-index: 999;
                 }
 
                 #eCharts-wrapper {
@@ -206,6 +221,82 @@ body {
                     #edit-number {
                         width: 100%;
                     }
+                }
+            }
+        }
+
+        &.forecasted-dialog {
+            .idlg-header {
+                height: auto !important;
+                display: unset !important;
+                padding: 0;
+            }
+
+            .idlg-title {
+                border: 0px;
+                height: 250px;
+                padding: 0;
+                background: #fff url(../images/thewinning.jpeg) no-repeat center center;
+                background-size: 100%;
+            }
+
+            .idlg-main {
+                .forecasted-main-container {
+                    .tay-number-text {
+                        text-align: center;
+                    }
+
+                    .forecasted-number-wrapper {
+                        display: flex;
+                        margin-top: 15px;
+                        height: 30px;
+
+                        .forecasted-number-wrapper-inner {
+                            margin: 0 auto;
+                            position: relative;
+                            opacity: 0;
+
+                            .number-item {
+                                color: #ffffff;
+                                font-size: 19px;
+                                font-weight: bold;
+                                display: inline-block;
+                                height: 30px;
+                                width: 30px;
+                                border-radius: 50%;
+                                background-color: red;
+                                text-align: center;
+
+                                &:hover {
+                                    cursor: pointer;
+                                }
+                            }
+
+                            i.change-to-other {
+                                transform: scale(1.5);
+                                margin-left: 5px;
+
+                                &:hover {
+                                    cursor: pointer;
+                                    transform: rotate(-180deg) scale(1.5);
+                                    transition: all 0.5s;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .private-info {
+                    text-align: center;
+                    padding: 20px 0;
+                }
+
+                .private-info-detail {
+                    text-align: center;
+                    padding: 20px 0;
+                    color: #B4BCCC;
+                    font-size: 12px;
+                    padding-bottom: 0;
                 }
             }
         }

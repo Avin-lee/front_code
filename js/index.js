@@ -24,6 +24,7 @@ define([
                 })
             })
             this._initLayDate()
+            this._initSelect()
             this._event()
         },
         // open database
@@ -57,6 +58,13 @@ define([
                 elem: 'input#date-input',
                 value: `${year}-${month}-${today}`,
                 showBottom: true
+            })
+        },
+        // init select container
+        _initSelect() {
+            $('#dropdownSelect').dropdownSelect({
+                isMiss: false,
+                placeholder: '请选择玩法'
             })
         },
         // set total date counts
@@ -163,9 +171,8 @@ define([
             }
             _self._setDateCounts(data.length)
         },
-        // render eCharts
-        _renderCharts(data, type) {
-            // format data
+        // sort all number
+        _sortAllNumber(data, type) {
             let countsArr = Array.from(new Array(80), e => e = 0)
             data.forEach(e => {
                 e.number.forEach(subE => {
@@ -184,10 +191,15 @@ define([
             if (type === 'odd') sortedOddAndEvenArr = sortedOddAndEvenArr.filter(e => e.number % 2 === 1)
             // type even
             if (type === 'even') sortedOddAndEvenArr = sortedOddAndEvenArr.filter(e => e.number % 2 === 0)
+            return sortedOddAndEvenArr
+        },
+        // render eCharts
+        _renderCharts(data, type) {
+            const _self = this
             // y -> number
-            let yArr = sortedOddAndEvenArr.map(e => e.number).reverse()
+            let yArr = _self._sortAllNumber(data, type).map(e => e.number).reverse()
             // number -> value
-            let ValueArr = sortedOddAndEvenArr.map(e => e.counts).reverse()
+            let ValueArr = _self._sortAllNumber(data, type).map(e => e.counts).reverse()
             // eCharts options
             const options = {
                 title: {
@@ -246,9 +258,23 @@ define([
             let number = $('input#result-input').val().split(/\s+/g).filter(e => e).map(e => {
                 return e.length === 1 ? `0${e}` : e
             })
-            number.length < 20 && _tip('你输入的号码少于20位哦~')
-            number.length > 20 && _tip('你输入的号码大于20位哦~')
-            number.length === 20 && _self._add(date, number)
+            let isLegal = true
+            let illegalNum = 0
+            let isBreak = true
+            number.forEach(e => {
+                if (isBreak && (Number(e) < 1 || Number(e) > 80)) {
+                    isLegal = false
+                    illegalNum = Number(e)
+                    isBreak = false
+                }
+            })
+            if (!isLegal) {
+                _tip(`${illegalNum} 不在 1~80 范围内哦~`)
+            } else {
+                number.length < 20 && _tip('你输入的号码少于20位哦~')
+                number.length > 20 && _tip('你输入的号码大于20位哦~')
+                number.length === 20 && _self._add(date, number)
+            }
         },
         // query number counts
         _queryNumberCounts() {
@@ -272,6 +298,49 @@ define([
             } else {
                 _tip(`你还没有输入数字呢~`)
             }
+        },
+        // set forecasted number
+        _setForecastedNumber(type) {
+            const _self = this
+            _self._get('all', (data) => {
+                // top 40 number
+                let top40HighRateNumberArr = _self._sortAllNumber(data, 'all').filter((e, index) => index < 40)
+                // today forecasted number
+                let forecastedNumberArr = []
+                while (forecastedNumberArr.length < Number(type)) {
+                    let randomIndex = Math.floor(Math.random() * top40HighRateNumberArr.length) // [0,39] not (0,39)
+                    let randomObj = top40HighRateNumberArr[randomIndex]
+                    let isExist = false
+                    forecastedNumberArr.forEach(e => {
+                        if (e.number === randomObj.number) {
+                            isExist = true
+                        }
+                    });
+                    !isExist && forecastedNumberArr.push(randomObj)
+                }
+                let forecastedNumberTpl = `<div class="forecasted-number-wrapper-inner">
+                                                {{each data as objItem}}
+                                                    <div class="number-item">
+                                                        <span class="number-info" title="{{objItem.number}} 近期出现了 {{objItem.counts}} 次">{{objItem.number}}</span>
+                                                    </div>
+                                                {{/each}}
+                                                <i class="aidicon aidicon-autorenew change-to-other" title="换一组"></i>
+                                            </div>`
+                $('.forecasted-number-wrapper').html(template.compile(forecastedNumberTpl)({
+                    data: forecastedNumberArr.sort(((key) => {
+                        return (a, b) => a[key] - b[key]
+                    })('number'))
+                }))
+                $('.forecasted-number-wrapper-inner').animate({
+                    top: '10px',
+                    opacity: '1',
+                }, 'fast', () => {
+                    $('.forecasted-number-wrapper-inner span.number-info').tooltip()
+                    $('i.change-to-other').tooltip({
+                        container: '.idlg-main'
+                    })
+                })
+            })
         },
         // register event
         _event() {
@@ -326,6 +395,20 @@ define([
                             let editedNumber = $('input#edit-number').val().split(/\s+/g).filter(e => e).map(e => {
                                 return e.length === 1 ? `0${e}` : e
                             })
+                            let isLegal = true
+                            let illegalNum = 0
+                            let isBreak = true
+                            editedNumber.forEach(e => {
+                                if (isBreak && (Number(e) < 1 || Number(e) > 80)) {
+                                    isLegal = false
+                                    illegalNum = Number(e)
+                                    isBreak = false
+                                }
+                            })
+                            if (!isLegal) {
+                                _tip(`${illegalNum} 不在 1~80 范围内哦~`)
+                                return false
+                            }
                             if (editedNumber.length < 20) {
                                 _tip('你输入的号码少于20位哦~')
                                 return false
@@ -369,6 +452,42 @@ define([
             })
             $(document).on('keydown', 'input#odd-even-number', (e) => {
                 e.keyCode === 13 && _self._checkOddEven()
+            })
+            // forecasted select
+            $(document).on('click', '.dropdownSelect-menu>li', function () {
+                let selectedVal = _self.selectedType = $(this).data('value')
+                $('#dropdownSelect').dropdownSelect('setChecked', {
+                    value: selectedVal,
+                    text: $(this).find('>a').html()
+                })
+                Dialog.open({
+                    width: 600,
+                    theme: 'forecasted-dialog',
+                    content() {
+                        return `<div class="forecasted-main-container">
+                                    <div class="tay-number-text">今日选 ${selectedVal} 中奖号码</div>
+                                    <div class="forecasted-number-wrapper"></div>
+                                <div>
+                                <div class="private-info">
+                                    <b>隐私声明</b>  |  <b>反馈问题</b>
+                                <div>
+                                <div class="private-info-detail">Copyright © 2021-2025 All Rights Reserved.<br/>Designed by Avin lee</div>`
+                    },
+                    onShow() {
+                        _self._setForecastedNumber(selectedVal)
+                    }
+                })
+            })
+            // change to other
+            $(document).on('click', 'i.change-to-other', () => {
+                $('i.change-to-other').tooltip('hide')
+                $('.forecasted-number-wrapper-inner').animate({
+                    top: '-10px',
+                    opacity: '0',
+                }, 'fast', () => {
+                    $('.forecasted-number-wrapper-inner').remove()
+                    _self._setForecastedNumber(_self.selectedType)
+                })
             })
             // statistics module
             $(document).on('click', '.eCharts-option-button span.btn-state', function () {
