@@ -39,13 +39,28 @@
                             <span class="aidicon aidicon-plus-circle-outline"></span>
                         </button>
                     </div>
-                    <div class="form-group clearfix">
+                    <div class="form-group half-group clearfix">
                         <label class="form-label tar">数字次数查询</label>
-                        <input type="number" class="form-control long-input" id="counts-query" placeholder="请输入你想查询的号码"
+                        <input type="number" class="form-control long-input" id="counts-query" placeholder="请输入号码"
                             autocomplete="off">
                         <button type="button" class="btn btn-primary" id="counts-query-button">
                             <span class="aidicon aidicon-magnify"></span>
                         </button>
+                    </div>
+                    <div class="form-group half-group clearfix">
+                        <label class="form-label tar">星期统计</label>
+                        <div class="dropdownSelect week-statistic">
+                            <div id="dropdownSelect-week-statistic" data-target="#"></div>
+                            <ul class="dropdownSelect-menu" role="menu" aria-labelledby="dLabel">
+                                <li data-value="1"><a href="javascript:void(0)">周一</a></li>
+                                <li data-value="2"><a href="javascript:void(0)">周二</a></li>
+                                <li data-value="3"><a href="javascript:void(0)">周三</a></li>
+                                <li data-value="4"><a href="javascript:void(0)">周四</a></li>
+                                <li data-value="5"><a href="javascript:void(0)">周五</a></li>
+                                <li data-value="6"><a href="javascript:void(0)">周六</a></li>
+                                <li data-value="0"><a href="javascript:void(0)">周日</a></li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="form-group half-group clearfix">
                         <label class="form-label tar">奇偶数查询</label>
@@ -58,7 +73,7 @@
                     <div class="form-group half-group clearfix">
                         <label class="form-label tar">预测下期开奖</label>
                         <div class="dropdownSelect forecasted">
-                            <div id="dropdownSelect" data-target="#"></div>
+                            <div id="dropdownSelect-forecasted" data-target="#"></div>
                             <ul class="dropdownSelect-menu" role="menu" aria-labelledby="dLabel">
                                 <li data-value="10"><a href="javascript:void(0)">选10</a></li>
                                 <li data-value="9"><a href="javascript:void(0)">选9</a></li>

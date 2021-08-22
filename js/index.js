@@ -62,7 +62,11 @@ define([
         },
         // init select container
         _initSelect() {
-            $('#dropdownSelect').dropdownSelect({
+            $('#dropdownSelect-week-statistic').dropdownSelect({
+                isMiss: false,
+                placeholder: '请选择'
+            })
+            $('#dropdownSelect-forecasted').dropdownSelect({
                 isMiss: false,
                 placeholder: '请选择玩法'
             })
@@ -200,11 +204,10 @@ define([
             let yArr = _self._sortAllNumber(data, type).map(e => e.number).reverse()
             // number -> value
             let ValueArr = _self._sortAllNumber(data, type).map(e => e.counts).reverse()
-            // eCharts options
-            const options = {
+            eChartsInstance.setOption({
                 title: {
                     text: '开奖数字结果统计',
-                    subtext: '本地数据'
+                    subtext: `${data.length} 期数据`
                 },
                 tooltip: {
                     trigger: 'axis',
@@ -248,8 +251,7 @@ define([
                         }
                     }
                 }]
-            }
-            eChartsInstance.setOption(options)
+            })
         },
         // add number
         _addNumber() {
@@ -360,7 +362,13 @@ define([
                     $('input#result-input').val('')
                     $('input#counts-query').val('')
                     $('input#odd-even-number').val('')
-                    _self._get('all', (data) => this._renderNumber(data))
+                    $('#dropdownSelect-week-statistic').dropdownSelect('clear')
+                    $('#dropdownSelect-forecasted').dropdownSelect('clear')
+                    $('.eCharts-option-button span.btn-state[data-value="all"]').addClass('checked').siblings('span.btn-state').removeClass('checked')
+                    _self._get('all', (data) => {
+                        this._renderNumber(data)
+                        this._renderCharts(data, 'all')
+                    })
                 }
             })
             // edit
@@ -453,10 +461,22 @@ define([
             $(document).on('keydown', 'input#odd-even-number', (e) => {
                 e.keyCode === 13 && _self._checkOddEven()
             })
+            // week statistic select
+            $(document).on('click', '#dropdownSelect-week-statistic+.dropdownSelect-menu>li', function () {
+                let selectedVal = $(this).data('value')
+                $('#dropdownSelect-week-statistic').dropdownSelect('setChecked', {
+                    value: selectedVal,
+                    text: $(this).find('>a').html()
+                })
+                _self._get('all', (data) => {
+                    let filterData = data.filter(e => Number(selectedVal) === new Date(e.result_date).getDay())
+                    _self._renderNumber(filterData)
+                })
+            })
             // forecasted select
-            $(document).on('click', '.dropdownSelect-menu>li', function () {
+            $(document).on('click', '#dropdownSelect-forecasted+.dropdownSelect-menu>li', function () {
                 let selectedVal = _self.selectedType = $(this).data('value')
-                $('#dropdownSelect').dropdownSelect('setChecked', {
+                $('#dropdownSelect-forecasted').dropdownSelect('setChecked', {
                     value: selectedVal,
                     text: $(this).find('>a').html()
                 })

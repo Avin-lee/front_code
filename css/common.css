@@ -194,7 +194,9 @@ body .main-wrapper .main-r .form-horizon .half-group input {
 }
 
 html .main-wrapper .main-r .form-horizon .half-group .forecasted,
-body .main-wrapper .main-r .form-horizon .half-group .forecasted {
+html .main-wrapper .main-r .form-horizon .half-group .week-statistic,
+body .main-wrapper .main-r .form-horizon .half-group .forecasted,
+body .main-wrapper .main-r .form-horizon .half-group .week-statistic {
   width: 210px;
   float: right;
   margin-right: 2px;
