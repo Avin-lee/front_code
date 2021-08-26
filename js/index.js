@@ -19,7 +19,7 @@ define([
             }
             this._openDB(() => {
                 this._get('all', (data) => {
-                    this._renderNumber(data)
+                    this._disPlaySerialNumber(data)
                     this._renderCharts(data, 'all')
                 })
             })
@@ -87,7 +87,7 @@ define([
             request.onsuccess = (e) => {
                 _tip('添加成功！', 'success')
                 _self._get('all', (data) => {
-                    _self._renderNumber(data)
+                    _self._disPlaySerialNumber(data)
                     $('.eCharts-option-button span.btn-state[data-value="all"]').addClass('checked').siblings().removeClass('checked')
                     _self._renderCharts(data, 'all')
                 })
@@ -115,7 +115,7 @@ define([
             request.onsuccess = (e) => {
                 _tip('删除成功！', 'success')
                 _self._get('all', (data) => {
-                    _self._renderNumber(data)
+                    _self._disPlaySerialNumber(data)
                     $('.eCharts-option-button span.btn-state[data-value="all"]').addClass('checked').siblings().removeClass('checked')
                     _self._renderCharts(data, 'all')
                 })
@@ -132,15 +132,15 @@ define([
             request.onsuccess = (e) => {
                 _tip('保存成功！', 'success')
                 _self._get('all', (data) => {
-                    _self._renderNumber(data)
+                    _self._disPlaySerialNumber(data)
                     $('.eCharts-option-button span.btn-state[data-value="all"]').addClass('checked').siblings().removeClass('checked')
                     _self._renderCharts(data, 'all')
                 })
             }
             request.onerror = (e) => _tip('保存失败！', 'danger')
         },
-        // render all number
-        _renderNumber(data, targetNum) {
+        // render target number
+        _renderTargetNumber(data, targetNum) {
             const _self = this
             if (!data.length) {
                 $('.recent-result').empty().append(`<div class="blank-nodata-icon"><p class="msg">没有数据</p></div>`)
@@ -286,11 +286,67 @@ define([
                 _self._get('all', (data) => {
                     let includeTargetRowArr = data.filter(e => e.number.includes(tarNumber))
                     _tip(`号码 ${$('input#counts-query').val()} 一共出现了 ${includeTargetRowArr.length} 次~`, 'primary', 5000)
-                    _self._renderNumber(includeTargetRowArr, tarNumber)
+                    _self._renderTargetNumber(includeTargetRowArr, tarNumber)
                 })
             } else {
                 _tip(`你还没有输入数字呢~`)
             }
+        },
+        // display serial number
+        _disPlaySerialNumber(data) {
+            const _self = this
+            if (!data.length) {
+                $('.recent-result').empty().append(`<div class="blank-nodata-icon"><p class="msg">没有数据</p></div>`)
+            } else {
+                let allSerialNumber = []
+                data.forEach(e => {
+                    let i = 0,
+                        j = 1,
+                        singleSerialArr = []
+                    while (i < 20) {
+                        if (Number(e.number[j]) === Number(e.number[j - 1]) + 1) {
+                            j++
+                        } else {
+                            if (j - i > 2) {
+                                for (let k = i; k < j; k++) {
+                                    singleSerialArr.push(e.number[k])
+                                }
+                            }
+                            i = j
+                            j = i + 1
+                        }
+                    }
+                    allSerialNumber.push(singleSerialArr)
+                })
+                let allNumberTpl = `
+                        {{each data as e index}}
+                            <div class="period-row">
+                                <div class="result-date">
+                                    <span class="text-primary">{{e.result_date}}</span>
+                                </div>
+                                <div class="number-wrapper">
+                                    {{each e.number as subE subIndex}}
+                                        <div class="number-item {{serialNumber[index].includes(subE) ? 'target-number' : ''}}">
+                                            <span class="number-info">{{subE}}</span>
+                                        </div>
+                                    {{/each}}
+                                </div>
+                                <div class="opt-buttons">
+                                    <button type="button" class="btn btn-sm btn-default hidden" data-date="{{e.result_date}}" data-action="edit" title="编辑">
+                                        <i class="aidicon aidicon-pencil-circle"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-default hidden" data-date="{{e.result_date}}" data-action="delete" title="删除">
+                                        <i class="aidicon aidicon-close-circle"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        {{/each}}`
+                $('.recent-result').empty().append(template.compile(allNumberTpl)({
+                    data: data.reverse(),
+                    serialNumber: allSerialNumber.reverse()
+                }))
+            }
+            _self._setDateCounts(data.length)
         },
         // check odd or even
         _checkOddEven() {
@@ -366,7 +422,7 @@ define([
                     $('#dropdownSelect-forecasted').dropdownSelect('clear')
                     $('.eCharts-option-button span.btn-state[data-value="all"]').addClass('checked').siblings('span.btn-state').removeClass('checked')
                     _self._get('all', (data) => {
-                        this._renderNumber(data)
+                        this._disPlaySerialNumber(data)
                         this._renderCharts(data, 'all')
                     })
                 }
@@ -470,7 +526,7 @@ define([
                 })
                 _self._get('all', (data) => {
                     let filterData = data.filter(e => Number(selectedVal) === new Date(e.result_date).getDay())
-                    _self._renderNumber(filterData)
+                    _self._disPlaySerialNumber(filterData)
                 })
             })
             // forecasted select
